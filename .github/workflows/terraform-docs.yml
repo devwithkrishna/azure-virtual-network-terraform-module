@@ -1,5 +1,10 @@
 name: generate-terraform-docs
 on:
+  workflow_run:
+    workflows:
+    - "create release"
+    types:
+    - completed
   workflow_dispatch:
   pull_request:
     types:
