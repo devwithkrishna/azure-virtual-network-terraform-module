@@ -10,7 +10,7 @@ output "vnet_location" {
 
 output "vnet_environment" {
   description = "Azure Vnet environment tag value"
-  value       = azurerm_virtual_network.vnet.tags.environment
+  value       = azurerm_virtual_network.vnet.tags["Environment"]
 }
 
 output "vnet_name" {

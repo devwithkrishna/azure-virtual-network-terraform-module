@@ -1,29 +1,29 @@
 variable "resource_group_name" {
-  default     = "test1"
+  default     = ""
   description = "Azure Vnet resource group name"
   type        = string
 }
 
 variable "vnet_name" {
-  default     = "test1"
+  default     = ""
   description = "Azure Vnet name"
   type        = string
 }
 
 variable "location" {
-  default     = "southindia"
+  default     = ""
   description = "Azure location"
   type        = string
 }
 
 variable "application_name" {
-  default     = "devwithkrishna"
+  default     = ""
   description = "Azure application name tag"
   type        = string
 }
 
 variable "environment" {
-  default     = "DEV"
+  default     = ""
   description = "Environment tag value in Azure"
   type        = string
   validation {
@@ -35,7 +35,7 @@ variable "environment" {
 variable "vnet_address_space" {
   description = "Azure VNET address space"
   type        = list(string)
-  default     = ["10.247.0.0/25"]
+  default     = [""]
   validation {
     condition     = length(var.vnet_address_space) > 0
     error_message = "The address_space variable must contain at least one CIDR block."
@@ -43,7 +43,7 @@ variable "vnet_address_space" {
 }
 
 variable "subnet_cidrs" {
-  default     = ["10.247.0.0/25"]
+  default     = [""]
   type        = list(string)
   description = "Azure Subnet Ip addresses"
   validation {
@@ -54,7 +54,7 @@ variable "subnet_cidrs" {
 
 
 variable "temporary" {
-  default     = "TRUE"
+  default     = ""
   description = "Temporary tag value in Azure"
   type        = string
   validation {
