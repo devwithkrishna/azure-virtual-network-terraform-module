@@ -15,7 +15,7 @@ resource "azurerm_network_security_group" "nsg" {
   name                = upper("${var.vnet_name}-nsg")
   location            = var.location
   resource_group_name = upper(var.resource_group_name)
-  depends_on = [ azurerm_resource_group.rg, azurerm_virtual_network.vnet, az ]
+  depends_on = [ azurerm_resource_group.rg, azurerm_virtual_network.vnet, azurerm_subnet.subnet ]
   tags = {
     Environment     = upper(var.environment)
     Orchestrator    = "Terraform"
