@@ -15,6 +15,7 @@ resource "azurerm_network_security_group" "nsg" {
   name                = upper("${var.vnet_name}-nsg")
   location            = var.location
   resource_group_name = upper(var.resource_group_name)
+  depends_on = [ azurerm_resource_group.rg, azurerm_virtual_network.vnet ]
   tags = {
     Environment     = upper(var.environment)
     Orchestrator    = "Terraform"
@@ -31,6 +32,9 @@ resource "azurerm_virtual_network" "vnet" {
   resource_group_name = upper(var.resource_group_name)
   location            = var.location
   address_space       = var.vnet_address_space
+
+  depends_on = [ azurerm_resource_group.rg ]
+
   tags = {
     Environment     = upper(var.environment)
     Orchestrator    = "Terraform"
@@ -55,4 +59,5 @@ resource "azurerm_subnet_network_security_group_association" "subnet2nsg" {
   count                     = length(var.subnet_cidrs)
   subnet_id                 = azurerm_subnet.subnet[count.index].id
   network_security_group_id = azurerm_network_security_group.nsg.id
+  depends_on = [ azurerm_resource_group.rg, azurerm_virtual_network.vnet, azurerm_network_security_group.nsg ]
 }
