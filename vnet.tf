@@ -15,7 +15,7 @@ resource "azurerm_network_security_group" "nsg" {
   name                = upper("${var.vnet_name}-nsg")
   location            = var.location
   resource_group_name = upper(var.resource_group_name)
-  depends_on = [ azurerm_resource_group.rg, azurerm_virtual_network.vnet ]
+  depends_on = [ azurerm_resource_group.rg, azurerm_virtual_network.vnet, az ]
   tags = {
     Environment     = upper(var.environment)
     Orchestrator    = "Terraform"
@@ -52,6 +52,7 @@ resource "azurerm_subnet" "subnet" {
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = [element(var.subnet_cidrs, count.index)] # Assign each CIDR from the list
+  depends_on = [ azurerm_resource_group.rg, azurerm_virtual_network.vnet ]
 }
 
 # Associate subnets to NSG
